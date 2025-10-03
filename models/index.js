@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const User = require('./User'); // Import User model
 const Route = require('./Route'); // Import Route model
 const Bus = require('./Bus'); // Import Bus model
-const Reservation = require('./reservation'); // Import Reservation model
+const Reservation = require('./Reservation'); // Import Reservation model
 
 // Database Connection
 const connectToDatabase = async () => {
