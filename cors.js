@@ -4,7 +4,7 @@ const cors = require('cors');
 const URL_WHITELIST = [
   process.env.CLIENT_URL,  // Ensure this is http://localhost:3001 in your .env
   process.env.SWAGGER_URL,
-  "https://ntc-reservation-system.onrender.com",  // Allow Render URL if you're deploying there
+  "https://ntc-reservation-frontend.onrender.com/",  // Allow Render URL if you're deploying there
   "http://localhost:3001",  // Local frontend URL
 ];
 
