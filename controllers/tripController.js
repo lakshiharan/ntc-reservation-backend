@@ -1,12 +1,9 @@
 const Trip = require('../models/Trip');
 const Route = require('../models/Route');
-const jwt = require('jsonwebtoken');
 
 // Add a New Trip (Admin and Operator Only)
 exports.addTrip = async (req, res) => {
-  if (!['admin', 'operator'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Access denied. Admins and operators only.' });
-  }
+  
 
   const { bus_id, route_id, departure_time, arrival_time, middle_stops } = req.body;
 
@@ -38,10 +35,7 @@ exports.addTrip = async (req, res) => {
 
 // Fetch All Trips (Admin and Operator Only)
 exports.getAllTrips = async (req, res) => {
-  if (!['admin', 'operator'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Access denied.' });
-  }
-
+  
   try {
     const trips = await Trip.find()
       .populate('bus_id', 'bus_number capacity bus_owner')
@@ -115,9 +109,6 @@ exports.getTripById = async (req, res) => {
 
 // Update a Trip (Admin and Operator Only)
 exports.updateTrip = async (req, res) => {
-  if (!['admin', 'operator'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Access denied.' });
-  }
 
   const { id } = req.params;
   const { bus_id, route_id, departure_time, arrival_time, middle_stops } = req.body;
@@ -162,9 +153,6 @@ exports.updateTrip = async (req, res) => {
 
 // Delete a Trip
 exports.deleteTrip = async (req, res) => {
-  if (!['admin', 'operator'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Access denied.' });
-  }
 
   try {
     const trip = await Trip.findByIdAndDelete(req.params.id);

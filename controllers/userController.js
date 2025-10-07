@@ -93,9 +93,6 @@ exports.getLoggedInUser = async (req, res) => {
 
 // Fetch all users (admin only)
 exports.getAllUsers = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
 
   try {
     const users = await User.find();
@@ -108,10 +105,6 @@ exports.getAllUsers = async (req, res) => {
 
 // Delete a user (admin only)
 exports.deleteUser = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
-
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
@@ -127,9 +120,6 @@ exports.deleteUser = async (req, res) => {
 
 // Update a user (admin only)
 exports.updateUser = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
 
   const { id } = req.params;
   const { name, email, role, phone_number } = req.body;

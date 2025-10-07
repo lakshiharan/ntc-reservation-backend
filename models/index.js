@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require('./User'); // Import User model
 const Route = require('./Route'); // Import Route model
 const Bus = require('./Bus'); // Import Bus model
+const Trip = require('./Trip');
 const Reservation = require('./Reservation'); // Import Reservation model
 
 // Database Connection
@@ -27,5 +28,6 @@ module.exports = {
   Route,
   Bus,
   Reservation,
+  Trip,
   connectToDatabase,
 };

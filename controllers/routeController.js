@@ -1,12 +1,8 @@
 const Route = require('../models/Route');
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
 
 // Add a New Route (Admin Only)
 exports.addRoute = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
+
 
   const { start_point, end_point, distance, fare } = req.body;
 
@@ -42,10 +38,7 @@ exports.getAllRoutes = async (req, res) => {
 
 // Update a Route (Admin Only)
 exports.updateRoute = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
-
+ 
   const { id } = req.params;
   const { start_point, end_point, distance, fare } = req.body;
 
@@ -70,9 +63,7 @@ exports.updateRoute = async (req, res) => {
 
 // Delete a Route (Admin Only)
 exports.deleteRoute = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
+  
 
   try {
     const route = await Route.findByIdAndDelete(req.params.id);

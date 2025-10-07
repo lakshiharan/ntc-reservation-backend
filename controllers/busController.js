@@ -1,14 +1,9 @@
 const Bus = require('../models/Bus');
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
 
 // Add a New Bus (Admin and Operator Only)
 exports.addBus = async (req, res) => {
   const { bus_number, capacity, route_id, bus_permission_number } = req.body;
 
-  if (!['admin', 'operator'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Access denied. Admins and operators only.' });
-  }
 
   if (!bus_number || !capacity || !route_id || !bus_permission_number) {
     return res.status(400).json({ error: 'All fields are required.' });
@@ -38,10 +33,7 @@ exports.addBus = async (req, res) => {
 
 // Fetch All Buses (Admin Only)
 exports.getAllBuses = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
-
+ 
   try {
     const buses = await Bus.find()
       .populate('route_id', 'start_point end_point')
@@ -55,14 +47,6 @@ exports.getAllBuses = async (req, res) => {
 
 // Fetch Operator's Buses
 exports.getMyBuses = async (req, res) => {
-  console.log("req:");
-  console.log(req.user);
-  
-  
-  if (req.user.role !== 'operator') {
-    return res.status(403).json({ error: 'Access denied. Operators only.' });
-  }
-
   try {
     const buses = await Bus.find({ bus_owner: req.user.id })
       .populate('route_id', 'start_point end_point')
@@ -78,9 +62,6 @@ exports.getMyBuses = async (req, res) => {
 
 // Update a Bus (Admin Only)
 exports.updateBus = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
 
   const { id } = req.params;
   const { bus_number, capacity, route_id, bus_permission_number, bus_owner } = req.body;

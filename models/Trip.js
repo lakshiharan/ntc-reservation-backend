@@ -7,7 +7,7 @@ const tripSchema = new mongoose.Schema({
   route_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Route', required: true },
   departure_time: { type: Date, required: true },
   arrival_time: { type: Date, required: true },
-  middle_stops: { type: String },
+  middle_stops: [{ type: String }],
 });
 tripSchema.virtual('available_seats').get(async function () {
   const bus = await mongoose.model('Bus').findById(this.bus_id);

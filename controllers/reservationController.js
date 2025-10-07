@@ -1,7 +1,6 @@
 const Reservation = require('../models/Reservation');
 const Bus = require('../models/Bus');
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 
 // Create New Reservations
@@ -60,9 +59,6 @@ exports.createReservation = async (req, res) => {
 
 // Fetch All Reservations (Admin Only)
 exports.getAllReservations = async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied. Admins only.' });
-  }
 
   const { ticket_id, username } = req.query;
 
