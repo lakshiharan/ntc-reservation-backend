@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(cors())
+app.use(cors)
 
 // Register routes
 app.use('/users', userRoutes);  // All user-related routes
