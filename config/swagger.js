@@ -11,14 +11,16 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: 'https://ntc-reservation-system.onrender.com', 
+      url: 'https://ntc-reservation-backend.onrender.com',
+      description: 'Production server',
+
     },
   ],
 };
 
 const options = {
   swaggerDefinition,
-  apis: ['./server.js'],
+  apis: ['./routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
